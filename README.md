@@ -1,2 +1,2 @@
 # html_introspection_with_brython
-how to introspect what the user might be 
+Just some basic introspection with brython.js, css, javascript, & html....
