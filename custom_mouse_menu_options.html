@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Custom Right-Click Menu</title>
+  <style>
+    .custom-menu {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 5px;
+      position: absolute;
+      display: none;
+    }
+    .custom-menu-option {
+      cursor: pointer;
+      padding: 5px;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.9.0/brython.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.9.0/brython_stdlib.min.js"></script>
+</head>
+<body onload="brython()">
+  <div id="customMenu" class="custom-menu">
+    <div class="custom-menu-option" onclick="handleCustomOption('Option 1')">Option 1</div>
+    <div class="custom-menu-option" onclick="handleCustomOption('Option 2')">Option 2</div>
+    <div class="custom-menu-option" onclick="handleCustomOption('Option 3')">Option 3</div>
+  </div>
+
+  <script type="text/python">
+    from browser import document, console import window
+
+    def handle_custom_option(option):
+        console.log(f"Selected option: {option}")
+        # Perform custom actions based on the selected option
+
+    def handleContextMenu(event):
+        event.preventDefault()  # Prevent default browser context menu
+        menu = document.select_one("#customMenu")
+        menu.style.display = "block"
+        menu.style.left = f"{event.clientX}px"
+        menu.style.top = f"{event.clientY}px"
+
+    document.select_one("html").bind("contextmenu", handleContextMenu)
+
+    def handleCustomOption(option):
+        handle_custom_option(option)
+        document.select_one("#customMenu").style.display = "none"
+    window.handleCustomOption=handleCustomOption
+
+  </script>
+  
+  <h1>Custom Right-Click Menu</h1>
+  <p>Right-click anywhere to display the custom menu.</p>
+  
+</body>
+</html>
